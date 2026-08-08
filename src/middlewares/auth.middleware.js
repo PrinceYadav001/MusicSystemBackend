@@ -1,0 +1,63 @@
+const jwt = require("jsonwebtoken");
+
+
+
+async function authArtist(req , res , next){
+    const token = req.cookies.token;
+
+    if(!token){
+        return res.status(401).json({
+            Message:"Unauthorized"
+        })
+    }
+
+    try{
+        const decoded = jwt.verify(token , process.env.JWT_SECRET);
+
+        if(decoded.role!="artist"){
+            return res.status(401).json({
+                message:"Unathorized"
+            })
+        }
+
+        req.user = decoded;
+        next();
+    }catch(err){
+        console.log(err);
+        return res.status(500).json("Internal server error");
+    }
+}
+
+
+
+async function authUser(req ,res , next){
+    const token = req.cookies.token;
+
+    if(!token){
+        return res.status(401).json({
+            message:"Unathorized User"
+        })
+    }
+    try{
+
+        const decoded = jwt.verify(token , process.env.JWT_SECRET);
+
+        if(decoded.role !=="user" && decoded.role!="artist"){
+            return res.status(401).json({
+                message:"You don't have access",
+            })
+        } 
+
+
+        req.user = decoded;
+        next();
+
+    }catch(err){
+        console.log(err.message);
+        return res.status(500).json({
+            message:"Internal server Error"
+        })
+    }
+}
+
+module.exports = {authArtist , authUser};

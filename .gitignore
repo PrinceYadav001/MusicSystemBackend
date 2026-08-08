@@ -1,0 +1,54 @@
+# dependencies
+node_modules/
+
+# environment files
+.env
+.env.*
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs/
+*.log
+
+# runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# directories
+dist/
+build/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# editor files
+.vscode/
+*.swp
+*.swo
+*.tmp
+
+# generated files
+coverage/
+
+# webpack
+.cache/
+
+# optional npm cache
+.npm
+
+# dotenv environment variable files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Misc
+npm-debug.log
+yarn-debug.log
+```
